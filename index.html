@@ -294,28 +294,33 @@
     <!-- Bootstrap script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 
-    <!-- Bold loader script -->
-    <script>
-        window.addEventListener('load', () => {
-          const loader = document.querySelector('.main-fader');
-          const mainContent = document.getElementById('main-content');
-      
-          // Make sure it's visible initially
-          loader.style.opacity = 1;
-          loader.style.transition = 'opacity 0.5s ease';
-      
-          setTimeout(() => {
-            // Fade out the loader
-            loader.style.opacity = 0;
-      
-            // After fade completes, hide loader and show main content
-            setTimeout(() => {
-              loader.style.display = 'none';
-              mainContent.style.display = 'block';
-            }, 800); // match the 0.5s fade duration
-          }, 800); // optional delay before starting fade
-        });
-    </script>
+<!-- Bold loader script -->
+<script>
+  // Når hele siden er færdig med at loade (billeder, CSS, osv.)
+  window.addEventListener('load', () => {
 
+      // Find HTML-elementet med klassen "main-fader" (den hvide loader-skærm)
+      const loader = document.querySelector('.main-fader');
+
+      // Find hovedindholdet på siden (det som skal vises bagefter)
+      const mainContent = document.getElementById('main-content');
+
+      // Sørg for at loaderen er synlig og har en overgangseffekt
+      loader.style.opacity = 1; // fuldt synlig
+      loader.style.transition = 'opacity 0.5s ease'; // blød overgang
+
+      // Vent 800 ms før vi starter med at fade loaderen ud
+      setTimeout(() => {
+          loader.style.opacity = 0; // gør loaderen gennemsigtig
+
+          // Når fade-effekten er færdig, skjul loader og vis hovedindhold
+          setTimeout(() => {
+              loader.style.display = 'none';        // fjern loader fra layout
+              mainContent.style.display = 'block';  // vis selve hjemmesiden
+          }, 800); // vent 800 ms så fade er færdig
+      }, 800); // valgfri forsinkelse før fade starter
+  });
+
+</script>
   </body>
 </html>

@@ -195,32 +195,40 @@
 
     <!-- Bold loader script -->
     <script>
-        window.addEventListener('load', () => {
+      // Når hele siden er færdig med at loade (inkl. billeder, CSS osv.)
+      window.addEventListener('load', () => {
+          // Tjekker brugerens netværksforbindelse
           const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  
+          // Finder loader-elementet og hovedindholdet
           const loader = document.querySelector('.main-fader');
           const mainContent = document.getElementById('main-content');
-      
-          // Check for slow network types
+  
+          // Definerer hvilke forbindelsestyper vi betragter som "langsomme"
           const slowConnections = ['slow-2g', '2g', '3g'];
-      
+  
+          // Hvis brugerens forbindelse findes og er langsom
           if (connection && slowConnections.includes(connection.effectiveType)) {
-            // Vis loader kun ved langsom forbindelse
-            loader.style.opacity = 1;
-            loader.style.transition = 'opacity 0.5s ease';
-      
-            setTimeout(() => {
-              loader.style.opacity = 0;
+              // Vis loader med fade-effekt
+              loader.style.opacity = 1;
+              loader.style.transition = 'opacity 0.5s ease';
+  
+              // Start fade ud efter 800 ms
               setTimeout(() => {
-                loader.style.display = 'none';
-                mainContent.style.display = 'block';
+                  loader.style.opacity = 0;
+  
+                  // Når fade er færdig, skjul loader og vis indhold
+                  setTimeout(() => {
+                      loader.style.display = 'none';
+                      mainContent.style.display = 'block';
+                  }, 800);
               }, 800);
-            }, 800);
           } else {
-            // Vis bare indholdet med det samme ved god forbindelse
-            loader.style.display = 'none';
-            mainContent.style.display = 'block';
+              // Hvis forbindelsen er hurtig, vis indholdet med det samme
+              loader.style.display = 'none';
+              mainContent.style.display = 'block';
           }
-        });
+      });
     </script>
 
   </body>
